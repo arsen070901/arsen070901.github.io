@@ -1,63 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
+ 
 <head>
-
-  <link href="style.css" rel="stylesheet">
-
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-  <title>Arsenii</title>
-
-
+  <style>
+ 
+  </style>
 </head>
-
-
+ 
 <body>
-
-<div id="Navigation">
-<ul class="Navigation">
-
-  <li><a href="index.html">Home</a></li>
-
-  <li><a href="html.html">HTML</a></li>
-
-  <li><a href="#">JavaScript</a>
-    <ul>
-
-      <li><a href="zad1.html">&#1047;&#1072;&#1076;&#1072;&#1095;&#1072;1</a></li>
-
-      <li><a href="zad2.html">&#1047;&#1072;&#1076;&#1072;&#1095;&#1072;2</a></li>
-
-      <li><a href="zad3.html">&#1047;&#1072;&#1076;&#1072;&#1095;&#1072;3</a></li>
-
-    </ul>
-
-  </li>
-
-  <li><a href="css.html">CSS</a></li>
-  <li><a href="firebase.html">firebase</a></li>
-</ul>
-
-</div>
-
-<br>
-
-<script>
-for (i = 1; i < 3; i++) {
-alert( i );
-}
-</script>
-<script>
-var i = 1var res = 1
-while (i <= 5) {
-res = res * i;
-++i;
-alert (res)
-}
-</script>
-</body>
-</html>
-
-<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+ 
+ 
+<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
 <script>
   // Initialize Firebase
   var config = {
@@ -70,3 +23,61 @@ alert (res)
   };
   firebase.initializeApp(config);
 </script>
+ 
+  <script>
+    function er1() {
+      firebase.database().ref("guys/" + document.getElementById("id_value").value).set(document.getElementById("id_value").value);
+      firebase.database().ref("guys/" + document.getElementById("id_value").value + "/name").set(document.getElementById("name_value").value);
+      firebase.database().ref("guys/" + document.getElementById("id_value").value + "/secondname").set(document.getElementById("secondname_value").value);
+      firebase.database().ref("guys/" + document.getElementById("id_value").value + "/lastname").set(document.getElementById("lastname_value").value);
+      firebase.database().ref("guys/" + document.getElementById("id_value").value + "/footsize").set(document.getElementById("footsize_value").value);
+      firebase.database().ref("guys/" + document.getElementById("id_value").value + "/url").set(document.getElementById("url_value").value);
+      firebase.database().ref("guys/" + document.getElementById("id_value").value + "/password").set(document.getElementById("password_value").value);
+    }
+ 
+    function er2() {
+      var b = document.getElementById("id_show").value
+      var a = firebase.database().ref('/guys');
+      a.on('value', function(snapshot) {
+        var snap = snapshot.val();
+        var g = snap[b];
+        document.getElementById("inf").innerHTML ="ИД: " + b + "<br> Имя: " + g.name +  "<br> Пароль: " + g.password + "<br> Фамилия: " + g.secondname + "<br> Отчество: " + g.lastname + "<br> Размер ноги: " + g.footsize +"<br Фото: > <img src=" + g.url + ">";
+      });
+    }
+    function er3() {
+      document.getElementById("inf").innerHTML ="" ;
+    }
+  </script>
+ 
+  ID
+  <input type="text" class="form-control" id="id_value" placeholder="" value="1" />
+  <br> name
+  <input type="text" class="form-control" id="name_value" placeholder="" value="alice" />
+  <br> secondname
+  <input type="text" class="form-control" id="secondname_value" placeholder="" value="follow" />
+  <br> lastname
+  <input type="text" class="form-control" id="lastname_value" placeholder="" value="whiterabbit" />
+  <br> footsize
+  <input type="text" class="form-control" id="footsize_value" placeholder="" value="37" />
+  <br> img
+  <input type="text" class="form-control" id="url_value" placeholder="" value="https://pp.userapi.com/c836126/v836126600/3e4d8/qiF0QnHMfX8.jpg" />
+  <br> password
+  <input type="text" class="form-control" id="password_value" placeholder="" value="" />
+  <br>
+  <br>
+  <a href="#on" class="button15" onclick="er1()">Добавить </a>
+  <br>
+  <br> ID
+  <input value="1" id="id_show" type="text" />
+  <br>
+  <br>
+  <a href="#on" class="button15" onclick="er2()">Вывести </a>
+  <br>
+  <a href="#on" class="button15" onclick="er3()">Сотри </a>
+  <br>
+  <div id="inf"></div>
+ 
+ 
+</body>
+</html>
+ 
